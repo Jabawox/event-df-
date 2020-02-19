@@ -20,33 +20,9 @@ var WebDF = process.env.WebDF;
 var WebAbdul = process.env.WebAbdul;
 var access_token = 'Bearer {'+Token+'}'
 
-const myLiffId = process.env.MY_LIFF_ID;
+
 
 app.use(express.static('public'));
-
-
-
-//app.get('/', (req, res) => {
- // res.end("ok")
-    //console.log('--------'+JSON.stringify(req.body));
-//})
-
-app.get('/test', (req, res) => {
-  res.end("ok")
-    //console.log('--------'+JSON.stringify(req.body));
-})
-
-app.get('/json', (req, res) => {
-    
-    
-    var text = {
-        "a" : "1",
-        "b" : "2"
-        
-    }
-  res.end(text)
-    //console.log('--------'+JSON.stringify(req.body));
-})
 
 
 
@@ -59,20 +35,14 @@ app.post('/webhook', (req, res) => {
 
 var data = req.body; 
 
-//console.log('-++++'+JSON.stringify(req.headers)) 
+
  
 if (req.body.events[0].type == "message") {
     if (req.body.events[0].message.type == "text") {
      
      var tex_t = req.body.events[0].message.text
-     console.log("---0---");
     console.log(tex_t);
-   //     if(tex_t == "ส่งผลวิ่ง"){
-   //     postToAbdul(req);    
-   //     }else{
-   //  postToDialogflow(req);
-   //     }
-    postToAbdul(req);
+    postToDialogflow(req);
         
       }else if(req.body.events[0].message.type == "image"){
         
@@ -93,13 +63,7 @@ if (req.body.events[0].type == "message") {
   }else if (req.body.events[0].type == "postback") {      
      var postback = req.body.events[0].postback.data
     
- var contents = postback.split('-');
-
-     var img = contents[0]
-     var iduser = contents[1]
     console.log("++++postback+++++"+postback);
-    console.log("--img--" + img);
-    console.log("--iduser--" + iduser);
    
  }
     
